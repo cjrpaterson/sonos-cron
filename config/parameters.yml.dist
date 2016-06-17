@@ -1,0 +1,8 @@
+aws:
+    region:
+    access_key:
+    access_secret:
+    sqs_url:
+
+sonos:
+    api_base_url: 'http://localhost:5005'

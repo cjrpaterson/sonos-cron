@@ -1,0 +1,33 @@
+services:
+    http_client:
+        class: GuzzleHttp\Client
+
+    sonos_cron.processor:
+        class: Osl\SonosCron\Services\QueueProcessor
+        arguments:
+            - '@aws.sqs_client'
+            - '%aws.sqs_url%'
+
+    sonos_cron.handler.say:
+        class: Osl\SonosCron\Services\Handler\SayHandler
+        arguments:
+            - '@sonos_cron.api_client'
+        tags:
+            -  { name: sonos_cron.handler }
+
+    sonos_cron.api_client:
+        class: Osl\SonosCron\Services\SonosApiClient
+        arguments:
+            - '@http_client'
+            - '%sonos.api_base_url%'
+
+    aws.sqs_client_factory:
+        class: Osl\SonosCron\Services\SqsClientFactory
+        arguments:
+            - '%aws.region%'
+            - '%aws.access_key%'
+            - '%aws.access_secret%'
+
+    aws.sqs_client:
+        class: Aws\Sqs\SqsClient
+        factory: ['@aws.sqs_client_factory', createSqsClient]
