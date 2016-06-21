@@ -21,13 +21,11 @@ services:
             - '@http_client'
             - '%sonos.api_base_url%'
 
-    aws.sqs_client_factory:
-        class: Osl\SonosCron\Services\SqsClientFactory
-        arguments:
-            - '%aws.region%'
-            - '%aws.access_key%'
-            - '%aws.access_secret%'
-
     aws.sqs_client:
         class: Aws\Sqs\SqsClient
-        factory: ['@aws.sqs_client_factory', createSqsClient]
+        factory: ['Aws\Sqs\SqsClient', 'factory']
+        arguments:
+            -
+                region: '%aws.region%'
+                key: '%aws.access_key%'
+                secret: '%aws.access_secret%'
