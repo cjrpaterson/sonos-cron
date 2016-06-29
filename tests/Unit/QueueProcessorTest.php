@@ -73,7 +73,7 @@ class QueueProcessorTest extends AbstractMockeryTest
     }
 
     /**
-     * Assert that multiple messages with a known handler as processed successfully
+     * Assert that multiple messages with a known handler are processed successfully
      */
     public function testSuccessWithWaitingMessagesMatchingKnownHandler()
     {
@@ -87,23 +87,6 @@ class QueueProcessorTest extends AbstractMockeryTest
         $queueProcessor = $this->createQueueProcessor();
         $queueProcessor->registerHandler($mockHandler);
         $queueProcessor->process();
-    }
-
-    /**
-     * @param string $handlerName
-     *
-     * @return MockInterface|HandlerInterface
-     */
-    private function createMockHandler($handlerName)
-    {
-        $mockHandler = \Mockery::mock(HandlerInterface::class);
-        $mockHandler
-            ->shouldReceive('getName')
-            ->once()
-            ->withNoArgs()
-            ->andReturn($handlerName);
-
-        return $mockHandler;
     }
 
     /**
@@ -133,6 +116,24 @@ class QueueProcessorTest extends AbstractMockeryTest
         $queueProcessor = $this->createQueueProcessor();
         $queueProcessor->registerHandler($mockHandler);
         $queueProcessor->process();
+    }
+    
+    /**
+     * Create and return mock instance of HandlerInterface which returns $handlerName when getName() is called
+     * @param string $handlerName
+     *
+     * @return MockInterface|HandlerInterface
+     */
+    private function createMockHandler($handlerName)
+    {
+        $mockHandler = \Mockery::mock(HandlerInterface::class);
+        $mockHandler
+            ->shouldReceive('getName')
+            ->once()
+            ->withNoArgs()
+            ->andReturn($handlerName);
+
+        return $mockHandler;
     }
 
     /**
