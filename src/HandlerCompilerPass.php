@@ -22,13 +22,9 @@ class HandlerCompilerPass implements CompilerPassInterface
             return;
         }
 
-        $definition = $container->findDefinition(
-            'sonos_cron.processor'
-        );
+        $definition = $container->findDefinition('sonos_cron.processor');
 
-        $taggedServices = $container->findTaggedServiceIds(
-            'sonos_cron.handler'
-        );
+        $taggedServices = $container->findTaggedServiceIds('sonos_cron.handler');
 
         foreach ($taggedServices as $id => $tags) {
             $definition->addMethodCall(
