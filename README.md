@@ -4,7 +4,8 @@ Service for retrieving commands from an AWS SQS queue and passing them to an ins
 ### Usage
 
 1. Install dependencies with composer (`composer install`).
-2. Add a cron job to run `php src/cron.php` however frequently you like; every 1 minute would mean messages are processed in near-realtime.
+2. Copy `src/parameters.yml.dist` to `src/parameters.yml` and add relevant values.
+3. Add a cron job to run `php src/cron.php` however frequently you would like messages to be processed.
 
 ### Handlers
 Handlers are registered in order to process specific API actions, e.g. `say`, `next` and `volume`. The handler which should be called is defined by the attribute `handler` in the body of the SQS message. Currently only the `say` handler is implemented.
