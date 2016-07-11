@@ -5,3 +5,7 @@ machine:
 test:
   override:
     - phpunit tests/
+
+dependencies:
+  cache_directories:
+    - ~/.composer/cache
