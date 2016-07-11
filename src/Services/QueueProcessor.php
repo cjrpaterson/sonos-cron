@@ -51,10 +51,7 @@ class QueueProcessor
         
         if (isset($response['Messages'])) {
             foreach ($response['Messages'] as $message) {
-                $receiptHandle = $message['ReceiptHandle'];
-
                 $body = json_decode($message['Body'], true);
-
                 $handler = $this->getRegisteredHandlerByName($body['handler']);
 
                 if ($handler) {
@@ -66,7 +63,7 @@ class QueueProcessor
 
                 $this->sqsClient->deleteMessage(array(
                     'QueueUrl' => $this->sqsQueueUrl,
-                    'ReceiptHandle' => $receiptHandle,
+                    'ReceiptHandle' => $message['ReceiptHandle'],
                 ));
             }
         } else {
