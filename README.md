@@ -1,5 +1,5 @@
 # sonos-cron
-Service for retrieving commands from an AWS SQS queue and passing them to an instance of the Sonos HTTP API (https://github.com/jishi/node-sonos-http-api)
+Service for retrieving commands from an AWS SQS queue and passing them to an instance of the Sonos HTTP API (https://github.com/jishi/node-sonos-http-api). Could be used, for example, to relay messages from your CI system (build passed/failed, production deploy triggered, etc.) to your office Sonos. Using an SQS queue to exchange messages means there's no need to open up your local network externally.
 
 ### Usage
 
