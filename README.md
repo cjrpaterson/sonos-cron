@@ -13,16 +13,16 @@ Service for retrieving commands from an AWS SQS queue and passing them to an ins
  - Currently only the `say` handler is implemented.
  - Further handlers can be added by implementing the `HandlerInterface`, and tagging the service with `name: sonos_cron.handler`.
 
- #### Say
- The body of a message which should be handled as a `say` action is:
- ```
- {
-   "handler": "say",
-   "payload": {
-     "room": "Living Room",
-     "message": "Hi, this will be read out by the Sonos",
-     "language": "en-gb"
-   }
+  #### Say
+  The body of a message which should be handled as a `say` action is:
+  ```
+  {
+    "handler": "say",
+    "payload": {
+      "room": "Living Room",
+      "message": "Hi, this will be read out by the Sonos",
+      "language": "en-gb"
+    }
  }
  ```
   - `language` should be made up of an [ISO 639-1 language code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) and [ISO 3166-1 alpha-2 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements), concatenated with a hyphen. E.g. `en-gb`, `fr-fr`, `zh-cn`.
